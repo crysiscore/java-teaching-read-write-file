@@ -13,10 +13,10 @@ public class Task1 {
     // C:\\idart ou C:\\Program Files\\idart ou C:\\Program Files (x86)\\idart.
     ReadWriteTextFile rwTextFile = new ReadWriteTextFile();
 
-    final static String logFileName = "/home/agnaldo/Documents/ficheiro_teste.txt";
+    final static String ficheiro_gravado = "/home/agnaldo/Documents/ficheiro_teste.txt";
     // definir uma lista de frutas
     List <String> frutas;
-
+    List<String> frutas_favoritas;
     //construtor
      Task1(){
          
@@ -24,11 +24,27 @@ public class Task1 {
         frutas = new ArrayList<>();
      }
 
-     public void AdicionarFruta( String nomeFruta){
+     public void AdicionarFruta( final String nomeFruta) {
         // adicionar uma fruta a lista de frutas
         frutas.add(nomeFruta);
 
-        rwTextFile.writeSmallTextFile(frutas, logFileName );
+        rwTextFile.writeSmallTextFile(frutas, ficheiro_gravado);
      }
+
+     public List<String> LerFrutasFavoritas(final String loction) {
+
+         try{
+            frutas_favoritas = rwTextFile.readSmallTextFile(ficheiro_gravado);
+         } catch (Exception e) {
+            System.out.println("Ficheiro nao encontrado");
+         }
+         if(frutas_favoritas.size()==0){
+           
+            System.out.println("Vazio");
+         }
+
+         return frutas_favoritas;
+     }
+
     
 }
